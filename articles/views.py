@@ -1,23 +1,8 @@
-from django.http import HttpResponseRedirect
-from django.views.generic import ListView, DetailView, View
+from django.shortcuts import render
 
-from .models import Article
+def post_list(request):
+    return render(request, 'articles/post_list.html', {})
 
-
-class ArticleListView(ListView):
-    model = Article
-    template_name = 'home.html'
-
-
-class ArticleDetailView(DetailView):
-    model = Article
-    template_name = 'detail.html'
-
-
-    def deleteArticleView(self, request, i):
-        y = Article.objects.get(id=i)
-        y.delete()
-        return HttpResponseRedirect('/')
 
 
 '''
