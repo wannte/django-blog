@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Article
 
@@ -8,18 +8,6 @@ def post_list(request):
     return render(request, 'articles/post_list.html', {'posts': posts})
 
 
-'''
-def addArticleView(request):
-    author = request.POST['author']
-    title = request.POST['title']
-    body = request.POST['body']
-    new_item = Article(author = author, title = title, body = body)
-    new_item.save()
-    return HttpResponseRedirect('')
-
-def deleteArticleView(request, i):
-    y = Article.objects.get(id = i)
-    y.delete()
-    return HttpResponseRedirect()
-
-'''
+def post_detail(request, pk):
+    post = get_object_or_404(Article, pk=pk)
+    return render(request, 'articles/post_detail.html', {'post': post})
